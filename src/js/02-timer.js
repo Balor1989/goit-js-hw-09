@@ -9,13 +9,11 @@ const refs = {
     numberOfSeconds:document.querySelector('[data-seconds]'),
     startBtn: document.querySelector('[data-start]'),
     selectedTime: null,
-    time: null
 }
-console.log(refs.numberOfDays.textContent)
 refs.startBtn.setAttribute('disabled', true)
 
 
-function pad(value) {
+const pad = value => {
   return String(value).padStart(2, '0');
 }
 
@@ -41,7 +39,6 @@ flatpickr("#datetime-picker", {
             return;
         }
         refs.selectedTime = selectedDates[0].getTime()
-        console.log(refs.selectedTime)
         Notify.success('The countdown can be started');
         refs.startBtn.removeAttribute('disabled')
         
@@ -71,18 +68,17 @@ function convertMs(ms) {
   const theCountdownStarted = () => {
      setInterval(() => {
       const { days, hours, minutes, seconds } = convertMs(onClickStartBtn())
-      function x({ days, hours, minutes, seconds }) {
-    refs.numberOfDays.textContent = `${days}`;
-    refs.numberOfHours.textContent = `${hours}`;
-    refs.numberOfMinutes.textContent = `${minutes}`;
-    refs.numberOfSeconds.textContent = `${seconds}`;
-  }
-      console.log({ days, hours, minutes, seconds })
-    }, 1000)
+      updateTime ({days, hours, minutes, seconds})
+     }, 1000)
    
   }
   
-
+   const updateTime = (({days, hours, minutes, seconds}) => {
+    refs.numberOfDays.textContent = `${days}`;
+    refs.numberOfHours.textContent = `${hours}`;
+    refs.numberOfMinutes.textContent = `${minutes}`;
+     refs.numberOfSeconds.textContent = `${seconds}`;
+  })
   refs.startBtn.addEventListener('click', theCountdownStarted )
 
   
