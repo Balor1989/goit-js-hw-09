@@ -16,6 +16,18 @@ body {
   color: #212121;
   line-height: 1.5;
 }
+li {
+  list-style: none;
+}
+input,
+button,
+a,
+label {
+  font-size: 30px;
+  font-family: 'Permanent Marker', sans-serif;
+  color: #212121;
+  text-decoration: none;
+}
 
 img {
   display: block;
