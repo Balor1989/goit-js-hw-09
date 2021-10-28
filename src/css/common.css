@@ -47,3 +47,11 @@ img {
   font-size: 30px;
   color: #212121;
 }
+.form{
+  display:inline-flex;
+  flex-direction: column;
+
+}
+.form button{
+  width: 300px;
+}
