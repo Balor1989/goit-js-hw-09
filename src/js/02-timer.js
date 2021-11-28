@@ -66,10 +66,15 @@ function convertMs(ms) {
 
 
   const theCountdownStarted = () => {
-     setInterval(() => {
+    setInterval(() => {
+      if (onClickStartBtn() < 1) {
+        return
+      }
       const { days, hours, minutes, seconds } = convertMs(onClickStartBtn())
-      updateTime ({days, hours, minutes, seconds})
+      updateTime({ days, hours, minutes, seconds })
      }, 1000)
+     
+      
    
   }
   
