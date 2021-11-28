@@ -18,6 +18,7 @@ const pad = value => {
 }
 
 const onClickStartBtn = () => {
+  
   return refs.selectedTime - new Date().getTime()
 }
 
