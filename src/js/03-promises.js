@@ -20,25 +20,27 @@ const createPromise = (position, delay) => {
   })
 }
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
+const onGeneratePromises = () => {
   const referral = {
-  delay: Number(refs.inputValueOfFirstDelay.value),
-  delayStep: Number(refs.inputValueOfDelayStep.value),
-  amount: Number(refs.inputValueOfAmount.value),
+    delay: Number(refs.inputValueOfFirstDelay.value),
+    delayStep: Number(refs.inputValueOfDelayStep.value),
+    amount: Number(refs.inputValueOfAmount.value),
+  }
+    for (let i = 1; i <= referral.amount; i += 1) {
+      createPromise(i, referral.delay)
+        .then(({ position, delay }) => {
+          Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          Notify.failure(`Rejected promise ${position} in ${delay}ms`);
+        });
+      referral.delay += referral.delayStep;
+    }
 }
 
-  for (let i = 1; i <= referral.amount; i += 1) {
-    createPromise(i, referral.delay)
-      .then(({ position, delay }) => {
-        Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-      })
-      .catch(({ position, delay }) => {
-        Notify.failure(`Rejected promise ${position} in ${delay}ms`);
-      });
-    referral.delay += referral.delayStep;
-  }
-
+const onFormSubmit = (e) => {
+  e.preventDefault();
+  onGeneratePromises()
   e.currentTarget.reset()
 }
 
